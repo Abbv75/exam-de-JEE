@@ -9,20 +9,19 @@ package beans;
  * @author bore
  */
 public class Employe {
-    private int matricule;
-    private String prenom, nom, tel;
+    private String matricule, prenom, nom, tel;
     private float salaire;
-    public Employe(int matricule, String prenom, String nom, String tel, float salaire) {
+    public Employe(String matricule, String prenom, String nom, String tel, float salaire) {
         this.matricule = matricule;
         this.prenom = prenom;
         this.nom = nom;
         this.tel = tel;
         this.salaire = salaire;
     }
-    public int getMatricule() {
+    public String getMatricule() {
         return matricule;
     }
-    public void setMatricule(int matricule) {
+    public void setMatricule(String matricule) {
         this.matricule = matricule;
     }
     public String getPrenom() {

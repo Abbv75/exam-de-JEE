@@ -35,25 +35,37 @@ public class EmployeServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            int matricule = Integer.parseInt(
-                    request.getParameter("matricule"));
+            String matricule =request.getParameter("matricule");
             String nom = request.getParameter("nom");
             String prenom = request.getParameter("prenom");
             String tel = request.getParameter("tel");
             float salaire = Float.parseFloat(
-                    request.getParameter("salaire"));
+                request.getParameter("salaire")
+            );
 
             Employe tmp = new Employe(matricule, prenom, nom, tel, salaire);
+            
+            boolean existe = false;
 
-            if (salaire >= 500000) {
-                tsup.add(tmp);
-            } else {
-                tinf.add(tmp);
+            for (Employe res : tsup) {
+                if(res.getMatricule().equals(matricule)){
+                    existe = true;
+                    break;
+                }
+            }
+            for (Employe res : tinf) {
+                if(res.getMatricule().equals(matricule)){
+                    existe = true;
+                    break;
+                }
+            }
+
+            if(!existe){
+                ((salaire >= 500000) ? tsup : tinf).add(tmp);
             }
 
             request.setAttribute("tsup", tsup);
             request.setAttribute("tinf", tinf);
-
             request.getRequestDispatcher("/page/listEmploye.jsp").forward(request, response);
     }
 
